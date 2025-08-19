@@ -20,4 +20,10 @@ export const COMMANDS_LIST: CommandItem[] = [
     description: "aperte para limpar o chat",
     letter: "L",
   },
+
+  {
+    title: "Esconder Janela",
+    description: "aperte para esconder a janela ativa",
+    letter: "E",
+  },
 ];

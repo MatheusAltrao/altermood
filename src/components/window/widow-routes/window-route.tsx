@@ -8,9 +8,14 @@ type RouteProps = "chat" | "help";
 
 export default function WindowRoute() {
   const [route, setRoute] = useState<RouteProps>("chat");
+  const [showWindow, setShowWindow] = useState(true);
 
   const handleChangeRoute = () => {
     setRoute((prevRoute) => (prevRoute === "chat" ? "help" : "chat"));
+  };
+
+  const handleChangeWindowVisibility = () => {
+    setShowWindow((prevShow) => !prevShow);
   };
 
   useActiveCommand(
@@ -18,8 +23,17 @@ export default function WindowRoute() {
     handleChangeRoute
   );
 
+  useActiveCommand(
+    (event: KeyboardEvent) => event.key.toLowerCase() === "e",
+    handleChangeWindowVisibility
+  );
+
   return (
-    <div>
+    <div
+      className={`${
+        showWindow ? "opacity-100 " : "opacity-0 invisible "
+      } transition-opacity duration-300`}
+    >
       {route === "chat" && <Chat />}
       {route === "help" && <Help />}
     </div>
