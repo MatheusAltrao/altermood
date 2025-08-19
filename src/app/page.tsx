@@ -1,9 +1,9 @@
-import Window from "@/components/window";
+import WindowRoute from "@/components/window/window-route";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col pt-[10vh]">
-      <Window />
+      <WindowRoute />
     </div>
   );
 }
