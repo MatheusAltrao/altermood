@@ -8,14 +8,32 @@ import {
 } from "@/components/ui/select";
 import { MOODS } from "@/constants/moods";
 import { CircleQuestionMark, Settings } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import Commands from "../ui/commands";
 
 export default function Window() {
-  const [mood, setMood] = useState("excited");
+  const [mood, setMood] = useState(0);
+  const moodSelected = MOODS[mood];
 
-  const moodSelected = MOODS.find((m) => m.value === mood);
+  const changeMood = () => {
+    setMood((prevMood) => (prevMood + 1) % MOODS.length);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.key.toLowerCase() === "m") {
+        event.preventDefault();
+        changeMood();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
     <div className="bg-zinc-900 w-full max-w-[900px] mx-auto rounded-md border ">

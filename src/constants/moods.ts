@@ -59,4 +59,17 @@ export const MOODS = [
     description: "Expressa sentimentos amorosos.",
     emoji: "😍",
   },
+  {
+    value: "email",
+    label: "Email",
+    description: "Adequado para comunicações por email, claro e objetivo.",
+    emoji: "📧",
+  },
+  {
+    value: "boss",
+    label: "Chefe",
+    description:
+      "Tom respeitoso e profissional para interações com superiores.",
+    emoji: "👔",
+  },
 ];
