@@ -10,8 +10,9 @@ import {
 } from "@/components/ui/select";
 import Window from "@/components/window";
 import { MOODS } from "@/constants/moods";
+import { useActiveCommand } from "@/hooks/active-command";
 import { CircleQuestionMark, Settings } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Chat() {
   const [mood, setMood] = useState(0);
@@ -21,20 +22,10 @@ export default function Chat() {
     setMood((prevMood) => (prevMood + 1) % MOODS.length);
   };
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.ctrlKey && event.key.toLowerCase() === "m") {
-        event.preventDefault();
-        changeMood();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
+  useActiveCommand(
+    (event: KeyboardEvent) => event.key.toLowerCase() === "m",
+    changeMood
+  );
 
   return (
     <Window>
@@ -76,7 +67,7 @@ export default function Chat() {
         <textarea
           name="content"
           id="content"
-          className="w-full h-[300px] bg-transparent ring-0 outline-none text-sm resize-none"
+          className="w-full h-[330px] bg-transparent ring-0 outline-none text-sm resize-none"
         ></textarea>
       </Window.Body>
       <Window.Footer />
