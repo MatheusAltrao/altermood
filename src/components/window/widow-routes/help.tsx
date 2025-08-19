@@ -1,9 +1,18 @@
+import { Button } from "@/components/ui/button";
 import Window from "@/components/window";
+import { ChevronLeft } from "lucide-react";
 
 export default function Help() {
   return (
     <Window>
-      <Window.Header>Ajuda</Window.Header>
+      <Window.Header>
+        <div className="flex items-center gap-2">
+          <Button className=" text-sm" variant={"secondary"} size={"icon"}>
+            <ChevronLeft />
+          </Button>
+          <span className="text-sm">Ajuda</span>
+        </div>
+      </Window.Header>
       <Window.Body>
         <div className="space-y-8 text-sm text-zinc-100">
           {/* Sobre */}
