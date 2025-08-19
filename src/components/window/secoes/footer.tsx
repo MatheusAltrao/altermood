@@ -7,10 +7,37 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { COMMANDS_LIST } from "@/constants/commands-list";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
+  const [open, setOpen] = useState(false);
+
+  const handleOpenChange = (value: boolean) => {
+    setOpen(value);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        handleOpenChange(!open);
+      }
+
+      if (event.key.toLowerCase() === "escape" && open) {
+        event.preventDefault();
+        handleOpenChange(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open]);
+
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={handleOpenChange}>
       <PopoverTrigger className="flex items-center">
         <Commands letter="K" /> comandos
       </PopoverTrigger>
