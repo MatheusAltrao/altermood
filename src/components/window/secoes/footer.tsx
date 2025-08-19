@@ -55,7 +55,7 @@ export default function Footer() {
                   <h3 className="text-sm">{command.title}</h3>
                   <p className="text-xs text-zinc-500">{command.description}</p>
                 </div>
-                <Commands letter="M" size="sm" />
+                <Commands letter={command.letter} size="sm" />
               </div>
             ))}
           </div>
