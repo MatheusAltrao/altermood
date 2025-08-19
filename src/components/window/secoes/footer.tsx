@@ -7,7 +7,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { COMMANDS_LIST } from "@/constants/commands-list";
-import { useEffect, useState } from "react";
+import { useActiveCommand } from "@/hooks/active-command";
+import { useState } from "react";
 
 export default function Footer() {
   const [open, setOpen] = useState(false);
@@ -16,25 +17,15 @@ export default function Footer() {
     setOpen(value);
   };
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.ctrlKey && event.key.toLowerCase() === "k") {
-        event.preventDefault();
-        handleOpenChange(!open);
-      }
+  useActiveCommand(
+    (event: KeyboardEvent) => event.ctrlKey && event.key.toLowerCase() === "k",
+    () => handleOpenChange(!open)
+  );
 
-      if (event.key.toLowerCase() === "escape" && open) {
-        event.preventDefault();
-        handleOpenChange(false);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [open]);
+  useActiveCommand(
+    (event: KeyboardEvent) => event.key.toLowerCase() === "escape" && open,
+    () => handleOpenChange(false)
+  );
 
   return (
     <Popover open={open} onOpenChange={handleOpenChange}>

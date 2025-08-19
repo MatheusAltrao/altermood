@@ -1,4 +1,4 @@
-import WindowRoute from "@/components/window/window-route";
+import WindowRoute from "@/components/window/widow-routes/window-route";
 
 export default function Home() {
   return (
