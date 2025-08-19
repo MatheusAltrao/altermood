@@ -6,7 +6,7 @@ interface CommandsProps {
 export default function Commands({ letter, size = "md" }: CommandsProps) {
   return (
     <span
-      className={` gap-1  mx-2 rounded-md text-xs text-zinc-300 flex items-center justify-center  select-none ${
+      className={` gap-1  mx-2 rounded-md text-xs text-zinc-300 space-x-1 select-none ${
         size === "sm" ? "text-xs" : size === "lg" ? "text-lg" : "text-sm"
       }`}
     >
