@@ -25,7 +25,11 @@ function WindowHeader({ children }: WindowHeaderProps) {
 }
 
 function WindowBody({ children }: WindowBodyProps) {
-  return <div className="px-4 py-8 space-y-2">{children}</div>;
+  return (
+    <div className="h-[450px] overflow-y-auto pr-2">
+      <div className="px-4 py-8 space-y-2 ">{children}</div>
+    </div>
+  );
 }
 
 function WindowFooter() {

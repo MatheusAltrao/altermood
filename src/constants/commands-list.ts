@@ -11,12 +11,12 @@ export const COMMANDS_LIST: CommandItem[] = [
     letter: "M",
   },
   {
-    title: "Trocar janela",
+    title: "Trocar Janela",
     description: "aperte para trocar a janela ativa",
-    letter: "T",
+    letter: "X",
   },
   {
-    title: "Limpar chat",
+    title: "Limpar Chat",
     description: "aperte para limpar o chat",
     letter: "L",
   },

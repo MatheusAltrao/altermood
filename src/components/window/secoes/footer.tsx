@@ -49,8 +49,11 @@ export default function Footer() {
           </div>
 
           <div className="space-y-2 py-3">
-            {COMMANDS_LIST.map((command) => (
-              <div className="flex justify-between hover:bg-zinc-900 py-2 px-3 transition-colors">
+            {COMMANDS_LIST.map((command, index) => (
+              <div
+                key={index}
+                className="flex justify-between hover:bg-zinc-900 py-2 px-3 transition-colors"
+              >
                 <div>
                   <h3 className="text-sm">{command.title}</h3>
                   <p className="text-xs text-zinc-500">{command.description}</p>
