@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import Commands from "@/components/ui/commands";
+import CopyTextButton from "@/components/ui/copy-text-button";
 import {
   Select,
   SelectContent,
@@ -12,7 +13,7 @@ import Window from "@/components/window";
 import { LANGUAGES } from "@/constants/languages";
 import { MOODS } from "@/constants/moods";
 import { useActiveCommand } from "@/hooks/active-command";
-import { CircleQuestionMark } from "lucide-react";
+import { CircleQuestionMark, Loader } from "lucide-react";
 import { useState, useTransition } from "react";
 
 interface ChatProps {
@@ -91,6 +92,9 @@ export default function Chat({ setRoute }: ChatProps) {
           </Select>
           <form onSubmit={handleSendPrompt} className="w-full">
             <input
+              disabled={isPending}
+              autoComplete="off"
+              required
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               name="prompt"
@@ -109,18 +113,28 @@ export default function Chat({ setRoute }: ChatProps) {
         </div>
       </Window.Header>
       <Window.Body>
-        <div>
-          <span className="text-sm text-zinc-500">
-            {moodSelected?.emoji} {moodSelected?.label} selecionado. pressione
-            <Commands letter="M" />
-            para alterar o Mood
-          </span>
+        <div className="space-y-4">
+          <div>
+            <span className="text-sm text-zinc-500">
+              {moodSelected?.emoji} {moodSelected?.label} selecionado. pressione
+              <Commands letter="M" />
+              para alterar o Mood
+            </span>
+          </div>
+          {answers.length > 0 && (
+            <div className="space-y-2 ">
+              {answers.map((answer, index) => (
+                <div className="flex gap-1 items-center" key={index}>
+                  <div className="p-3 border border-border flex flex-col gap-1 justify-end rounded-md bg-zinc-950  w-full ">
+                    <p className="text-sm ">{answer}</p>
+                  </div>
+                  <CopyTextButton text={answer} />
+                </div>
+              ))}
+            </div>
+          )}
+          {isPending && <Loader size={20} className="animate-spin" />}
         </div>
-        {/*   <textarea
-          name="content"
-          id="content"
-          className="w-full h-[330px] bg-transparent ring-0 outline-none text-sm resize-none"
-        ></textarea> */}
       </Window.Body>
       <Window.Footer />
     </Window>

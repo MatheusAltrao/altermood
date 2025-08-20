@@ -21,12 +21,12 @@ export default function Window({ children }: WindowProps) {
 }
 
 function WindowHeader({ children }: WindowHeaderProps) {
-  return <div className="border-b px-4 flex items-center h-12">{children}</div>;
+  return <div className="border-b px-4 flex items-center">{children}</div>;
 }
 
 function WindowBody({ children }: WindowBodyProps) {
   return (
-    <div className="  overflow-y-auto pr-2">
+    <div className="overflow-y-auto pr-2">
       <div className="px-4 py-8 space-y-2 ">{children}</div>
     </div>
   );
@@ -34,7 +34,7 @@ function WindowBody({ children }: WindowBodyProps) {
 
 function WindowFooter() {
   return (
-    <footer className="border-t px-4 flex items-center justify-end h-12">
+    <footer className="border-t px-4 flex items-center justify-end">
       <Footer />
     </footer>
   );
