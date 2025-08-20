@@ -36,7 +36,9 @@ export default function Footer() {
         <div>
           <div className="border-b p-3 flex items-center justify-between ">
             <span>Comandos</span>
-            <span className="text-xs text-zinc-500">apert Esc para fechar</span>
+            <span className="text-xs text-zinc-500">
+              aperte Esc para fechar
+            </span>
           </div>
 
           <div className="space-y-2 py-3">

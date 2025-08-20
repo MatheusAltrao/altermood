@@ -9,6 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Window from "@/components/window";
+import { LANGUAGES } from "@/constants/languages";
 import { MOODS } from "@/constants/moods";
 import { useActiveCommand } from "@/hooks/active-command";
 import { CircleQuestionMark } from "lucide-react";
@@ -19,8 +20,14 @@ interface ChatProps {
 }
 
 export default function Chat({ setRoute }: ChatProps) {
+  const [language, setLanguage] = useState("pt-br");
+  const [prompt, setPrompt] = useState("");
   const [mood, setMood] = useState(0);
   const moodSelected = MOODS[mood];
+
+  const handleLanguageChange = (value: string) => {
+    setLanguage(value);
+  };
 
   const changeMood = () => {
     setMood((prevMood) => (prevMood + 1) % MOODS.length);
@@ -35,19 +42,29 @@ export default function Chat({ setRoute }: ChatProps) {
     <Window>
       <Window.Header>
         <div className="flex items-center gap-2 w-full">
-          <Select value="pt-br">
-            <SelectTrigger className="w-[52px] px-1 bg-transparent border-0 outline-none ring-0">
+          <Select value={language} onValueChange={handleLanguageChange}>
+            <SelectTrigger
+              value={language}
+              className="w-[52px] px-1 bg-transparent border-0 outline-none ring-0"
+            >
               <SelectValue placeholder="Idioma" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="pt-br">🇧🇷</SelectItem>
-              <SelectItem value="en">🇺🇸</SelectItem>
-              <SelectItem value="es">🇪🇸</SelectItem>
+              {LANGUAGES.map((language) => (
+                <SelectItem key={language.value} value={language.value}>
+                  {language.label}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
           <input
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            name="prompt"
+            id="prompt"
+            autoFocus
             type="text"
-            placeholder="escreva o seu texto aqui ..."
+            placeholder="Escreva o seu texto aqui ..."
             className="w-full h-10 bg-transparent ring-0 outline-none text-sm placeholder:text-zinc-500"
           />
         </div>

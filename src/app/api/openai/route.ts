@@ -7,7 +7,7 @@ async function POST(request: Request) {
     apiKey: process.env.OPENAI_API_KEY as string,
   });
 
-  const { prompt, mood } = await request.json();
+  const { prompt, mood, language } = await request.json();
 
   if (!prompt) {
     return NextResponse.json({ error: "Missing prompt" });
@@ -20,7 +20,7 @@ async function POST(request: Request) {
   const findMood = MOODS.find((m) => m.value === mood);
 
   try {
-    const response = await openai.chat.completions.create({
+    /*  const response = await openai.chat.completions.create({
       model: "gpt-4",
       messages: [
         {
@@ -36,7 +36,9 @@ async function POST(request: Request) {
       top_p: 1,
       frequency_penalty: 0,
       presence_penalty: 0,
-    });
+    }); */
+
+    const response = prompt + " - " + (findMood?.description || "");
 
     return NextResponse.json(response);
   } catch (error) {
