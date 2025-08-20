@@ -40,11 +40,6 @@ export default function Chat({ setRoute }: ChatProps) {
     setMood((prevMood) => (prevMood + 1) % MOODS.length);
   };
 
-  useActiveCommand(
-    (event: KeyboardEvent) => event.ctrlKey && event.key.toLowerCase() === "m",
-    changeMood
-  );
-
   const handleSendPrompt = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!prompt) return;
@@ -77,6 +72,21 @@ export default function Chat({ setRoute }: ChatProps) {
       }
     });
   };
+
+  const handleClearAnswers = () => {
+    setAnswers([]);
+    localStorage.removeItem("alterMoodAnswers");
+  };
+
+  useActiveCommand(
+    (event: KeyboardEvent) => event.ctrlKey && event.key.toLowerCase() === "m",
+    changeMood
+  );
+
+  useActiveCommand(
+    (event: KeyboardEvent) => event.ctrlKey && event.key.toLowerCase() === "l",
+    handleClearAnswers
+  );
 
   return (
     <Window>
