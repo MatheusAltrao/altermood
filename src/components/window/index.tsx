@@ -14,7 +14,7 @@ interface WindowBodyProps {
 
 export default function Window({ children }: WindowProps) {
   return (
-    <div className="bg-zinc-900 w-full max-w-[900px] mx-auto rounded-md border">
+    <div className="bg-zinc-900 h-screen w-full max-w-[900px]  grid grid-rows-[48px_1fr_48px] lg:max-h-[540px] mx-auto lg:rounded-md border">
       {children}
     </div>
   );
@@ -26,7 +26,7 @@ function WindowHeader({ children }: WindowHeaderProps) {
 
 function WindowBody({ children }: WindowBodyProps) {
   return (
-    <div className="h-[450px] overflow-y-auto pr-2">
+    <div className="  overflow-y-auto pr-2">
       <div className="px-4 py-8 space-y-2 ">{children}</div>
     </div>
   );

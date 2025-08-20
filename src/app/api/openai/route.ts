@@ -28,15 +28,12 @@ export async function POST(request: Request) {
   }
 
   try {
-    /*  const response = await openai.chat.completions.create({
+    const response = await openai.chat.completions.create({
       model: "gpt-4",
       messages: [
         {
           role: "system",
-          content:
-            "Chat você apenas vai pegar o texto recebido e mudar o tom dele. O tom que você vai mudar é o seguinte: " +
-            (findMood?.description || ""), e no idioma " +
-            language,
+          content: ` Chat você apenas vai pegar o texto recebido e mudar para o tom ${findMood.description}, e no idioma ${language},sem uso de emojis e travessuras, e sem repetir o texto original. `,
         },
         { role: "user", content: prompt },
       ],
@@ -45,13 +42,11 @@ export async function POST(request: Request) {
       top_p: 1,
       frequency_penalty: 0,
       presence_penalty: 0,
-    }); */
+    });
 
-    const response =
-      prompt + " - " + findMood.description + ", e no idioma " + language;
-
-    return NextResponse.json(response);
+    const content = response.choices[0].message.content;
+    return NextResponse.json(content ? content.trim() : "");
   } catch (error) {
-    return NextResponse.json({ error: "Failed to generate response" });
+    return NextResponse.json({ error: "Failed to generate response" + error });
   }
 }
