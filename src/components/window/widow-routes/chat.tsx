@@ -14,7 +14,7 @@ import { LANGUAGES } from "@/constants/languages";
 import { MOODS } from "@/constants/moods";
 import { useActiveCommand } from "@/hooks/active-command";
 import { CircleQuestionMark, Loader } from "lucide-react";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 
 interface ChatProps {
   setRoute: (route: "chat" | "help") => void;
@@ -25,10 +25,15 @@ export default function Chat({ setRoute }: ChatProps) {
   const [prompt, setPrompt] = useState("");
   const [mood, setMood] = useState(0);
   const [isPending, startTransition] = useTransition();
-  const [answers, setAnswers] = useState<string[]>(() => {
+
+  const [answers, setAnswers] = useState<string[]>([]);
+
+  useEffect(() => {
     const storedAnswers = localStorage.getItem("alterMoodAnswers");
-    return storedAnswers ? JSON.parse(storedAnswers) : [];
-  });
+    if (storedAnswers) {
+      setAnswers(JSON.parse(storedAnswers));
+    }
+  }, []);
 
   const moodSelected = MOODS[mood];
 
