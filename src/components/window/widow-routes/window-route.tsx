@@ -34,7 +34,7 @@ export default function WindowRoute() {
         showWindow ? "opacity-100 " : "opacity-0 invisible "
       } transition-opacity duration-300`}
     >
-      {route === "chat" && <Chat />}
+      {route === "chat" && <Chat setRoute={setRoute} />}
       {route === "help" && <Help setRoute={setRoute} />}
     </div>
   );

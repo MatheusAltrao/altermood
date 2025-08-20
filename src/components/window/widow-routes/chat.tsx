@@ -11,10 +11,14 @@ import {
 import Window from "@/components/window";
 import { MOODS } from "@/constants/moods";
 import { useActiveCommand } from "@/hooks/active-command";
-import { CircleQuestionMark, Settings } from "lucide-react";
+import { CircleQuestionMark } from "lucide-react";
 import { useState } from "react";
 
-export default function Chat() {
+interface ChatProps {
+  setRoute: (route: "chat" | "help") => void;
+}
+
+export default function Chat({ setRoute }: ChatProps) {
   const [mood, setMood] = useState(0);
   const moodSelected = MOODS[mood];
 
@@ -48,10 +52,7 @@ export default function Chat() {
           />
         </div>
         <div className="flex items-center gap-2 text-sm text-zinc-500">
-          <Button variant="ghost" size="icon">
-            <Settings />
-          </Button>
-          <Button variant="ghost" size="icon">
+          <Button onClick={() => setRoute("help")} variant="ghost" size="icon">
             <CircleQuestionMark />
           </Button>
         </div>
@@ -64,11 +65,11 @@ export default function Chat() {
             para alterar o Mood
           </span>
         </div>
-        <textarea
+        {/*   <textarea
           name="content"
           id="content"
           className="w-full h-[330px] bg-transparent ring-0 outline-none text-sm resize-none"
-        ></textarea>
+        ></textarea> */}
       </Window.Body>
       <Window.Footer />
     </Window>
