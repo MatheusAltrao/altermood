@@ -25,7 +25,11 @@ export default function Chat({ setRoute }: ChatProps) {
   const [prompt, setPrompt] = useState("");
   const [mood, setMood] = useState(0);
   const [isPending, startTransition] = useTransition();
-  const [answers, setAnswers] = useState<string[]>([]);
+  const [answers, setAnswers] = useState<string[]>(() => {
+    const storedAnswers = localStorage.getItem("alterMoodAnswers");
+    return storedAnswers ? JSON.parse(storedAnswers) : [];
+  });
+
   const moodSelected = MOODS[mood];
 
   const handleLanguageChange = (value: string) => {
@@ -61,8 +65,11 @@ export default function Chat({ setRoute }: ChatProps) {
         }
 
         const data = await response.json();
-        console.log(data);
-        setAnswers((prev) => [...prev, data]);
+        setAnswers((prev) => [data, ...prev]);
+        localStorage.setItem(
+          "alterMoodAnswers",
+          JSON.stringify([data, ...answers])
+        );
         setPrompt("");
       } catch (error) {
         console.error(error);
@@ -121,6 +128,8 @@ export default function Chat({ setRoute }: ChatProps) {
               para alterar o Mood
             </span>
           </div>
+          {isPending && <Loader size={20} className="animate-spin" />}
+
           {answers.length > 0 && (
             <div className="space-y-2 ">
               {answers.map((answer, index) => (
@@ -133,7 +142,6 @@ export default function Chat({ setRoute }: ChatProps) {
               ))}
             </div>
           )}
-          {isPending && <Loader size={20} className="animate-spin" />}
         </div>
       </Window.Body>
       <Window.Footer />
