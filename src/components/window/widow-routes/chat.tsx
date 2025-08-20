@@ -13,7 +13,7 @@ import { LANGUAGES } from "@/constants/languages";
 import { MOODS } from "@/constants/moods";
 import { useActiveCommand } from "@/hooks/active-command";
 import { CircleQuestionMark } from "lucide-react";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 
 interface ChatProps {
   setRoute: (route: "chat" | "help") => void;
@@ -23,6 +23,8 @@ export default function Chat({ setRoute }: ChatProps) {
   const [language, setLanguage] = useState("pt-br");
   const [prompt, setPrompt] = useState("");
   const [mood, setMood] = useState(0);
+  const [isPending, startTransition] = useTransition();
+  const [answers, setAnswers] = useState<string[]>([]);
   const moodSelected = MOODS[mood];
 
   const handleLanguageChange = (value: string) => {
@@ -34,9 +36,39 @@ export default function Chat({ setRoute }: ChatProps) {
   };
 
   useActiveCommand(
-    (event: KeyboardEvent) => event.key.toLowerCase() === "m",
+    (event: KeyboardEvent) => event.ctrlKey && event.key.toLowerCase() === "m",
     changeMood
   );
+
+  const handleSendPrompt = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!prompt) return;
+
+    startTransition(async () => {
+      try {
+        const response = await fetch("/api/openai", {
+          method: "POST",
+          body: JSON.stringify({
+            prompt,
+            language,
+            mood: moodSelected?.value,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to send prompt");
+        }
+
+        const data = await response.json();
+        console.log(data);
+        setAnswers((prev) => [...prev, data]);
+        setPrompt("");
+      } catch (error) {
+        console.error(error);
+        alert("Erro ao enviar o prompt. Tente novamente.");
+      }
+    });
+  };
 
   return (
     <Window>
@@ -57,16 +89,18 @@ export default function Chat({ setRoute }: ChatProps) {
               ))}
             </SelectContent>
           </Select>
-          <input
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            name="prompt"
-            id="prompt"
-            autoFocus
-            type="text"
-            placeholder="Escreva o seu texto aqui ..."
-            className="w-full h-10 bg-transparent ring-0 outline-none text-sm placeholder:text-zinc-500"
-          />
+          <form onSubmit={handleSendPrompt} className="w-full">
+            <input
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              name="prompt"
+              id="prompt"
+              autoFocus
+              type="text"
+              placeholder="Escreva o seu texto aqui ..."
+              className="w-full h-10 bg-transparent ring-0 outline-none text-sm placeholder:text-zinc-500"
+            />
+          </form>
         </div>
         <div className="flex items-center gap-2 text-sm text-zinc-500">
           <Button onClick={() => setRoute("help")} variant="ghost" size="icon">

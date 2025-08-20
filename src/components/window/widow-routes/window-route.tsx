@@ -19,12 +19,12 @@ export default function WindowRoute() {
   };
 
   useActiveCommand(
-    (event: KeyboardEvent) => event.key.toLowerCase() === "x",
+    (event: KeyboardEvent) => event.ctrlKey && event.key.toLowerCase() === "x",
     handleChangeRoute
   );
 
   useActiveCommand(
-    (event: KeyboardEvent) => event.key.toLowerCase() === "e",
+    (event: KeyboardEvent) => event.ctrlKey && event.key.toLowerCase() === "e",
     handleChangeWindowVisibility
   );
 

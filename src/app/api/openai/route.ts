@@ -2,7 +2,7 @@ import { MOODS } from "@/constants/moods";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
-async function POST(request: Request) {
+export async function POST(request: Request) {
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY as string,
   });
@@ -17,7 +17,15 @@ async function POST(request: Request) {
     return NextResponse.json({ error: "Missing mood" });
   }
 
+  if (!language) {
+    return NextResponse.json({ error: "Missing language" });
+  }
+
   const findMood = MOODS.find((m) => m.value === mood);
+
+  if (!findMood) {
+    return NextResponse.json({ error: "Invalid mood" });
+  }
 
   try {
     /*  const response = await openai.chat.completions.create({
@@ -27,7 +35,8 @@ async function POST(request: Request) {
           role: "system",
           content:
             "Chat você apenas vai pegar o texto recebido e mudar o tom dele. O tom que você vai mudar é o seguinte: " +
-            (findMood?.description || ""),
+            (findMood?.description || ""), e no idioma " +
+            language,
         },
         { role: "user", content: prompt },
       ],
@@ -38,7 +47,8 @@ async function POST(request: Request) {
       presence_penalty: 0,
     }); */
 
-    const response = prompt + " - " + (findMood?.description || "");
+    const response =
+      prompt + " - " + findMood.description + ", e no idioma " + language;
 
     return NextResponse.json(response);
   } catch (error) {
