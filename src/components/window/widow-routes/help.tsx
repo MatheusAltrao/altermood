@@ -1,13 +1,23 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import Window from "@/components/window";
 import { ChevronLeft } from "lucide-react";
 
-export default function Help() {
+interface HelpProps {
+  setRoute: (route: "chat" | "help") => void;
+}
+
+export default function Help({ setRoute }: HelpProps) {
   return (
     <Window>
       <Window.Header>
         <div className="flex items-center gap-2">
-          <Button className=" text-sm" variant={"secondary"} size={"icon"}>
+          <Button
+            onClick={() => setRoute("chat")}
+            className="text-sm"
+            variant={"secondary"}
+            size={"icon"}
+          >
             <ChevronLeft />
           </Button>
           <span className="text-sm">Ajuda</span>

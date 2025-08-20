@@ -4,7 +4,7 @@ import { useActiveCommand } from "@/hooks/active-command";
 import { useState } from "react";
 import Help from "./help";
 
-type RouteProps = "chat" | "help";
+export type RouteProps = "chat" | "help";
 
 export default function WindowRoute() {
   const [route, setRoute] = useState<RouteProps>("chat");
@@ -35,7 +35,7 @@ export default function WindowRoute() {
       } transition-opacity duration-300`}
     >
       {route === "chat" && <Chat />}
-      {route === "help" && <Help />}
+      {route === "help" && <Help setRoute={setRoute} />}
     </div>
   );
 }
