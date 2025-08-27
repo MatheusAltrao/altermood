@@ -33,7 +33,7 @@ export async function POST(request: Request) {
       messages: [
         {
           role: "system",
-          content: ` Chat você apenas vai pegar o texto recebido e mudar para o tom ${findMood.description}, e no idioma ${language},sem uso de emojis e travessuras, e sem repetir o texto original. `,
+          content: ` Chat você apenas vai pegar o texto recebido e mudar para o tom ${findMood.description}, e no idioma ${language},sem uso de emojis e travessão. `,
         },
         { role: "user", content: prompt },
       ],
