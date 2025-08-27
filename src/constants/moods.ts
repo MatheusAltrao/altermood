@@ -2,74 +2,85 @@ export const MOODS = [
   {
     value: "excited",
     label: "Excitado",
-    description: "Expressa entusiasmo e energia.",
+    description:
+      "Responda com muito entusiasmo, energia e empolgação, transmitindo vibração positiva e intensidade.",
     emoji: "🤩",
   },
   {
     value: "happy",
     label: "Feliz",
-    description: "Transmite alegria e positividade.",
+    description:
+      "Responda de forma alegre e otimista, transmitindo felicidade, leveza e positividade.",
     emoji: "😄",
   },
   {
     value: "sad",
     label: "Triste",
-    description: "Demonstra tristeza ou melancolia.",
+    description:
+      "Responda em um tom melancólico, expressando empatia, sensibilidade e um ar de tristeza.",
     emoji: "😢",
   },
   {
     value: "angry",
     label: "Bravo",
-    description: "Mostra irritação ou raiva.",
+    description:
+      "Responda demonstrando irritação, impaciência ou indignação, com um tom mais ríspido.",
     emoji: "😠",
   },
   {
     value: "neutral",
     label: "Neutro",
-    description: "Mantém um tom imparcial e objetivo.",
+    description:
+      "Responda de forma objetiva, imparcial e equilibrada, sem emoção aparente.",
     emoji: "😐",
   },
   {
     value: "casual",
     label: "Casual",
-    description: "Utiliza uma linguagem descontraída.",
+    description:
+      "Responda de forma descontraída, como em uma conversa leve entre amigos, usando uma linguagem simples.",
     emoji: "😎",
   },
   {
     value: "formal",
     label: "Formal",
-    description: "Adota um tom sério e profissional.",
+    description:
+      "Responda de forma séria e profissional, com linguagem clara, polida e respeitosa.",
     emoji: "🧐",
   },
   {
     value: "sarcastic",
     label: "Sarcástico",
-    description: "Usa ironia ou sarcasmo.",
+    description:
+      "Responda com ironia ou sarcasmo, usando humor ácido e um tom provocativo.",
     emoji: "😏",
   },
   {
     value: "humorous",
     label: "Engraçado",
-    description: "Apresenta um tom divertido.",
+    description:
+      "Responda de forma divertida e espirituosa, usando humor leve e criativo.",
     emoji: "😂",
   },
   {
     value: "romantic",
     label: "Romântico",
-    description: "Expressa sentimentos amorosos.",
+    description:
+      "Responda com carinho e afeto, transmitindo sentimentos amorosos e apaixonados.",
     emoji: "😍",
   },
   {
     value: "email",
     label: "Email",
-    description: "Adequado para comunicações por email, claro e objetivo.",
+    description:
+      "Responda como se fosse uma comunicação por email: clara, objetiva, educada e organizada.",
     emoji: "📧",
   },
   {
     value: "boss",
     label: "Chefe",
     description:
-      "Tom respeitoso e profissional para interações com superiores.",
+      "Responda com um tom respeitoso e profissional, adequado para falar com superiores ou gestores.",
     emoji: "👔",
   },
 ];
