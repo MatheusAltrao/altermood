@@ -65,13 +65,13 @@ export default function Help({ setRoute }: HelpProps) {
               <div>
                 <p className="text-zinc-300 text-xs mb-2">Original</p>
                 <div className="bg-zinc-800 border border-zinc-700 p-3 rounded text-zinc-100">
-                  "Olá, tudo bem?"
+                  &quot;Olá, tudo bem?&quot;
                 </div>
               </div>
               <div>
                 <p className="text-zinc-300 text-xs mb-2">Casual 😎</p>
                 <div className="bg-zinc-800 border border-zinc-700 p-3 rounded text-zinc-100">
-                  "Iai meu mano, tudo beleza?"
+                  &quot;Iai meu mano, tudo beleza?&quot;
                 </div>
               </div>
             </div>
@@ -137,8 +137,8 @@ export default function Help({ setRoute }: HelpProps) {
             <h2 className="text-zinc-50 font-medium mb-4">Dicas</h2>
             <ul className="space-y-2 text-zinc-400 text-xs">
               <li>• Experimente diferentes moods com o mesmo texto</li>
-              <li>• Use "Email" para comunicações profissionais</li>
-              <li>• Use "Chefe" para contextos formais de trabalho</li>
+              <li>• Use Email para comunicações profissionais</li>
+              <li>• Use Chefe para contextos formais de trabalho</li>
               <li>• Combine moods para diferentes situações</li>
             </ul>
           </section>

@@ -6,7 +6,6 @@ const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
-export const fontSans = inter.className;
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={` ${fontSans} dark antialiased`}>{children}</body>
+      <body className={` ${inter.className} dark antialiased`}>{children}</body>
     </html>
   );
 }
